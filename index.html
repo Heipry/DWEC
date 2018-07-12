@@ -23,26 +23,30 @@
             var retardo = setTimeout(function () {
                 if (nVentana){
                     alert("Ventana abierta");
-                    nVentana.alert("Esta es la nueva ventana");
+                    nVentana.alert("Esta ventana es: " +nVentana.location);
                 }
             }, 3000);
         }
         function cerrarNueva () {
-            if (nVentana){
+            if (nVentana && !nVentana.closed){
                 nVentana.close();
                 nVentana = null;
                 alert("Ventana cerrada");
             }
         }
         window.addEventListener('load', function(){
-
+                //LOCATION
             var boton3 = document.getElementById('url');
             boton3.addEventListener('click', function () {
                 var texto = "La URL es: "+ location.href;
                 texto += "\nEl host es "+ location.host;
+                texto += "\nEl hostname es "+ location.hostname;
                 texto += "\nLa ruta es "+ location.pathname;
+                texto += "\nEl puerto es "+ location.port;
+                texto += "\nEl protocolo es "+ location.protocol;
                 alert(texto);
             });
+                //NAVIGATOR
             var boton4 = document.querySelector('#navegador');
             boton4.addEventListener('click', function () {
                 var texto = "Navegador es : "+ navigator.appName;
