@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Ventana hija</title>
+    <meta name="description" content="Ventana ejemplo a abrir desde JS">
+    <meta name="author" content="Javier Diaz">
+    <script>
+        window.addEventListener('load', function () {
+            var boton = document.querySelector('#envio');
+            console.log(boton);
+            boton.addEventListener('click', function () {
+                var texto =document.getElementById('texto').value;
+                // usamos opener porque es ventana nueva (no va a funcionar parent)
+                var parrafo = opener.document.getElementById('parrafo');
+                parrafo.innerHTML = '<p>'+texto+'</p>';
+            });
+        });
+        
+    </script>
+</head>
+
+<body>
+
+    <form id="formulario">
+        <label for="texto">Introduce un texto:</label>
+        <input type="text" name="texto" id="texto">
+        <input type="button" value="Enviar" id="envio">
+    </form>
+
+</body>
+
+</html>

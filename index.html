@@ -1,90 +1,103 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Unidad 3 DWEC</title>
-        <meta name="description" content="Ejemplos y ejercicios unidad 3 DWEC">
-        <meta name="author" content="Javier Diaz">
-        <script>
-            var nVentana;
-                function crearNueva(){
-                    var direccion = prompt("Introduce url", "");
-                    var url = direccion =="" ? "":"http://"+direccion;
-                    nVentana = window.open(url,"","height = 400, width = 800");
-                    var retardo = setTimeout(function () {
-                        if (nVentana){
-                            alert("Ventana abierta");
-                            nVentana.alert("Esta es la nueva ventana");
-                        }
-                    }, 3000);                  
-                       
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Unidad 3 DWEC</title>
+    <meta name="description" content="Ejemplos y ejercicios unidad 3 DWEC">
+    <meta name="author" content="Javier Diaz">
+    <script>
+        var nVentana;
+        function crearNueva(urlParam = ''){
+            var url1;
+            if (urlParam != "") {
+                url1 = urlParam;
+            }else{
+              var direccion = prompt("Introduce url", "");
+                url1 = direccion =="" ? "":"http://"+direccion;  
+            }
+            
+            nVentana = window.open(url1,"","height = 400, width = 800");
+            var retardo = setTimeout(function () {
+                if (nVentana){
+                    alert("Ventana abierta");
+                    nVentana.alert("Esta es la nueva ventana");
                 }
-                function cerrarNueva () {
-                    if (nVentana){
-                        nVentana.close();
-                        nVentana = null;
-                        alert("Ventana cerrada");
-                    }
+            }, 3000);
+        }
+        function cerrarNueva () {
+            if (nVentana){
+                nVentana.close();
+                nVentana = null;
+                alert("Ventana cerrada");
+            }
+        }
+        window.addEventListener('load', function(){
+
+            var boton3 = document.getElementById('url');
+            boton3.addEventListener('click', function () {
+                var texto = "La URL es: "+ location.href;
+                texto += "\nEl host es "+ location.host;
+                texto += "\nLa ruta es "+ location.pathname;
+                alert(texto);
+            });
+            var boton4 = document.querySelector('#navegador');
+            boton4.addEventListener('click', function () {
+                var texto = "Navegador es : "+ navigator.appName;
+                texto += "\nVersion "+ navigator.appVersion;
+                texto += "\nCookies = "+ navigator.cookieEnabled;
+                texto += "\ncodigo = "+ navigator.appCodeName;
+                texto += "\nSistema = "+ navigator.platform;
+                texto += "\nResumen = "+ navigator.userAgent;
+                texto += "\nJava activado = "+ navigator.javaEnabled();
+                alert(texto);
+            });
+            var boton5 = document.querySelector('#documento');
+            boton5.addEventListener('click', function () {
+                var texto = "La ventana de trabajo es : "+ document.title;
+                texto += "\nModificado "+ document.lastModified;
+                texto += "\nDominio = "+ document.domain;
+                texto += "\nURL = "+ document.URL;   
+                alert(texto);
+                document.write("<p>Información mostrada, ejecución terminada</p>");
+            });
+
+
+            var botonMarco = document.querySelector('#bMarco');
+            botonMarco.addEventListener('click', function () {
+                var marco = document.getElementById("marco");
+                console.log(marco.contentDocument);
+                var texto = "El iframe es : "+ marco.name;
+                texto += "\nAlto "+ marco.height;
+                texto += "\nU = "+ marco.src;
+                texto += "\nAncho = "+marco.width;
+                alert(texto);
+            });
+            var marco = document.getElementById("marco");
+                //Si marco fuera frame seria niguales, si es iframe son distintos
+                if (marco==window.frames[0]) {
+                    console.log(window.frames[0]);
+                }else {
+                    console.log(window.frames[0]);
+                    console.log('ahora otro');
+                    console.log(marco);
                 }
-
-            window.addEventListener('load', function(){
-                
-                    var boton3 = document.getElementById('url');
-                    boton3.addEventListener('click', function () {
-                        var texto = "La URL es: "+ location.href;
-                        texto += "\nEl host es "+ location.host;
-                        texto += "\nLa ruta es "+ location.pathname;
-                        alert(texto);
-                    });
-                    var boton4 = document.querySelector('#navegador');
-                    boton4.addEventListener('click', function () {
-                        var texto = "Navegador es : "+ navigator.appName;
-                        texto += "\nVersion "+ navigator.appVersion;
-                        texto += "\nCookies = "+ navigator.cookieEnabled;
-                        texto += "\ncodigo = "+ navigator.appCodeName;
-                        texto += "\nSistema = "+ navigator.platform;
-                        texto += "\nResumen = "+ navigator.userAgent;
-                        texto += "\nJava activado = "+ navigator.javaEnabled();
-                        alert(texto);
-                    });
-                    var boton5 = document.querySelector('#documento');
-                    boton5.addEventListener('click', function () {
-                        var texto = "La ventana de trabajo es : "+ document.title;
-                        texto += "\nModificado "+ document.lastModified;
-                        texto += "\nDominio = "+ document.domain;
-                        texto += "\nURL = "+ document.URL;   
-                        alert(texto);
-                        document.write("<p>Información mostrada, ejecución terminada</p>");
-                    });
-                    
-                    
-                    var botonMarco = document.querySelector('#bMarco');
-                    botonMarco.addEventListener('click', function () {
-                        var marco = document.getElementById("marco");
-                        console.log(marco.contentDocument);
-                        var texto = "El iframe es : "+ marco.name;
-                        texto += "\nAlto "+ marco.height;
-                        texto += "\nU = "+ marco.src;
-                        texto += "\nAncho = "+marco.width;
-                        alert(texto);
-                    });
-
             });            
         </script>
     </head>
 
     <body>
-
+        <button id="hija" onclick="crearNueva('ventana.html')">Abrir hija</button>
         <button id="nueva" onclick="crearNueva()">Nueva</button>
         <button id="cerrar" onclick="cerrarNueva()">Cerrar</button>
         <button id="url">+Info URL</button>
         <button id="navegador">+Info Navegador</button>
         <button id="documento">+Info Documento</button>
+        <div id="parrafo"></div>
         <hr>
-        <iframe src="http://puertas-rusticas.com" frameborder="1" id="marco"></iframe>
+        <iframe src="index.html" frameborder="1" id="marco"></iframe>
         <button id="bMarco">+Info Iframe</button>
     </body>
 
