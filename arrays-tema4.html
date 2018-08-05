@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+    <head>
+        
+        <!-- Global Metas -->
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="Javier Diaz">
+        <meta name="keywords" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Ejemplos Array- Unidad 3</title>
+
+        <!-- Mobile Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    	<script>
+    		var miarray = new Array();
+    		var otroArray = new Array(40); //No necesario
+    		console.log(miarray.length);
+    		console.log(otroArray.length);
+    		otroArray[53]= "casa";
+    		console.log(otroArray.length);
+    		var semana = new Array("lunes","martes","miercoles","jueves", "viernes");
+    		var finde = ["sabado", "domingo"];
+    		var tareas = {"lunes":"compra","martes":"trabajo","miercoles":"salir","jueves":"casa","viernes":"otra"};
+    		console.log(semana[3]);
+    		console.log(finde[0]);
+    		console.log(tareas[semana[1]]);
+    		console.log(tareas[0]); //undefined
+    		//Recorrer Array
+    		for (var i = 0; i < semana.length; i++) {
+    			document.write(semana[i]+"<br>");
+    		}
+    		document.write("<hr>");
+    		j=0;
+    		while (j<finde.length) {
+    			document.write(finde[j]+"<br>");
+    			j++;
+    		}
+    		document.write("<hr>");
+    		//for each (var dia in semana) document.write(dia); //Deprecated (Error 791343)
+    		//document.write(dia+"<br>") foreach (dia in finde);
+    		for (var dia in tareas){ //Itera sobre las claves
+    			document.write(dia +"<br>");
+    		}
+    		document.write("<hr>");
+    		for (var dia of semana) { //Solo funciona con arrays numericos (no objetos)
+    			document.write(dia +"<br>");
+    		}
+
+    		document.write("<hr>");
+    		//También solo arrays numericos
+    		semana.forEach( function(dia, num) {document.write(num +": "+dia+"<br>");});
+    		// Borrar elemento de array
+    		otroArray[53]=null; //Se borra elemento pero no se reduce length
+    		console.log(otroArray.length);
+    		console.log(otroArray[53]); //null
+    		otroArray[53]="otracasa";
+    		delete otroArray[53]; //Se borra elemento pero no se reduce length (usar con objetos);
+    		console.log(otroArray.length);
+    		console.log(otroArray[53]); // undefined
+    		otroArray[53]="otracasamas";
+    		otroArray.splice(53, 1); //Se elimina elemento y se reduce length
+    		console.log(otroArray[53]); //undefined
+    		console.log(otroArray.length);
+    		//Propiedades
+    		semanaC = semana.concat(finde); //Crea array concatenado
+    		console.log(semanaC);
+    		console.log(semanaC.join()); // Crea string con elementos
+    		console.log(semanaC.pop()); //Elimina ultimo y lo devuelve
+    		console.log(semanaC.push("domingo")); //Añade elemento y devuelve nueva length
+    		console.log(semanaC.reverse()); //Invierte orden
+    		console.log(semanaC.shift()) // Como pop pero con el primero
+    		console.log(semanaC.unshift("domingo")); //como push pero al principio
+    		console.log(semanaC.slice(1, 3)); // Devuelve array mas pequeño
+    		console.log(semanaC.sort()); // Ordena Array
+    		console.log(semanaC.splice(2, 4)); //Elimina elementos de un array
+    		console.log(semanaC.toString()); //Convierte array en string
+    		console.log(semanaC.valueOf()); // Devuelve valor
+    		//Arrays sincronizados
+    		var profesores = ["Javier","Pepe","Juan"];
+    		var asignaturas = ["DWES", "DWEC", "DIW"];
+    		var n_alumnos = [63,55,71];
+    		function imprimir(i){
+    			document.write(profesores[i]+ " imparte " + asignaturas[i] + " a " + n_alumnos[i] + " alumnos.<br>"  );
+    		}
+			for (var i = 0; i < profesores.length; i++) {
+			    imprimir(i);
+			}
+			//Arrays multidimensionales
+			var registro = new Array();
+			registro[0]= new Array("Maria", 32);
+			registro[1]= new Array("Pepe", 41);
+			registro[2]= new Array("Juan", 26);
+			var registro2 = [
+				["Maria",32],
+				["Pepe",41],
+				["Juan",26],
+			];
+			console.log(registro2[0][0]);
+			console.log(registro[0][1]);
+			//Para recorrerlo se necesitan 2 bucles anidados
+    	</script>
+ 
+    </head>
+    <body>
+
+        
+    </body>
+</html>
