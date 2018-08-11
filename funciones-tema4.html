@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+    <head>
+        
+        <!-- Global Metas -->
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="Javier Diaz">
+        <meta name="keywords" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Ejemplos Funciones - Unidad 5</title>
+
+        <!-- Mobile Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    	<script>
+    		var frase="aaa"; //variable global
+    		function hacercosas(cosa){
+    			var frase2="bbb"//variable local
+    			console.log(cosa);
+    			console.log(frase2);
+    			console.log(frase);//Usamos v global
+    		}
+    		function hacercosas2(cosa){
+    			var frase="bbb"//variable local
+    			console.log(cosa);
+    			console.log(frase);//Usamos v local
+    		}
+    		hacercosas();
+    		hacercosas2();
+    		// Funciones predefinidas
+    		console.log(decodeURI("http://www.eancar.com"));
+    		console.log(decodeURIComponent("http://google.com"));
+    		console.log(encodeURI("http://eancar.com"));
+    		console.log(encodeURIComponent("http://tapasrioja.es"));
+    		console.log(escape("asasdd"));
+    		eval("x=5;y=2;document.write(x*y)");
+    		console.log(isFinite(44));
+    		console.log(isNaN(44));
+    		console.log(Number("44"));
+    		console.log(parseFloat("44"));
+    		console.log(parseInt("44"));
+    		console.log(unescape("aaa"));
+    		
+    	</script>
+ 
+    </head>
+    <body>
+
+        
+    </body>
+</html>
