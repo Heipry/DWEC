@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="buscar.php" name="formularioN" id="formularioID" method="post">
+		<label for="busqueda">Busqueda por:</label>
+		<input type="text" id="busqueda" name="busqueda" value="Palabra"><br>
+		<input type="checkbox" id="repeticiones" name="repeticiones" value="repetir">
+			<label for="repeticiones">Mostrar repeticiones</label><br>
+		<input type="radio" id="mayus" name="case" value="caseSensitive">
+			<label for="mayus">Conservar Mayúsculas</label><br>
+		<input type="radio" id="mezcla" name="case" value="caseInsensitive">
+			<label for="mezcla">Mayúsculas y minúsculas</label><br>
+		<select name="visualizar" id="visualizar">
+			<option value="pantalla">Imprimir en pantalla</option>
+			<option value="impresora">Imprimir</option>
+			<option value="archivo">Guardar en archivo</option>
+		</select><br>
+		<input type="submit" id="submit" value="Buscar">
+	</form>
+</body>
+<script>
+	//Acceder a form
+	var formulario=document.getElementById("formularioID");
+	//Acceder a form
+	var primerForm=document.getElementsByTagName("form")[0];
+	//Acceder a form
+	var formu=document.forms[0];
+	//Acceder a form
+	var miformu=document.forms["formularioN"];
+	//Acceder a form
+	var miformuN=document.formularioN;
+	//--
+	if(formulario==primerForm && primerForm==formu && formu == miformu && miformu == miformuN) console.log('todos los forms son el mismo');
+	//Acceso propiedades form
+	console.log(formulario.action);
+	//Modificar propiedad
+	formulario.action+='&id=35';
+	console.log(formulario.action);
+	/**
+	Propiedades: acceptCharset, action. enctype, length, method, name, target, reset(), submit()
+	**/
+	//Propiedad elements (contiene una colección con todos los inputs del formulario)
+	console.log(formulario.elements[1]);
+	//propiedades text: defaultValue, form, maxLength, name, readOnli, size, type, value, select()
+	//propiedades checkbox: checked, defaultChecked, form, name. type, value
+	//propiedades radio conjunto: length
+	console.log(formulario.case.length)	
+	//propiedades radio opcion: checked
+	console.log(formulario.case[0].checked);
+	//propiedades select: selectedIndex
+	console.log(formulario.visualizar.selectedIndex);
+	//propiedades select option: text, value
+	console.log(formulario.visualizar[formulario.visualizar.selectedIndex].text)
+	console.log(formulario.visualizar[formulario.visualizar.selectedIndex].value)
+</script>
+</html>

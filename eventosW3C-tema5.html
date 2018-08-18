@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		function identificar () {
+			//usamos this sin objeto
+			console.log(this.name+' '+this.id+' '+this.value+' '+this.type);
+		}
+		function registrarEventos () {
+			document.getElementById('nombre').addEventListener('click', identificar);
+			document.getElementById('apellido1').addEventListener('click', identificar);
+			var apellido2=document.getElementById('apellido2');
+			apellido2.addEventListener('click', identificar);
+			//Se pueden añadir varios eventos a un objeto
+			// Se pueden usar funciones anonimas
+			document.getElementById('nombre').addEventListener('click', function () {
+				console.log('Esto es el nombre de pila')
+			});
+			//eventListenerList actualmente no es compatible con ningun navegador
+			//console.log(apellido2.eventListenerList);
+
+			//Quitar evento (solo se pueden quitar las funciones no anonimas)
+			document.getElementById("quita").addEventListener('click', function () {
+				document.getElementById('nombre').removeEventListener('click', identificar);
+			});
+			//Usar prevent default (se debe pasar el evento como parametro)
+			document.getElementById('enlace').addEventListener('click', function (evento) {
+				evento.preventDefault();
+				alert("No te vas, la manera correcta de hacerlo es esta");
+			});
+		}
+		// Postergamos cargas conflictivas hasta la carga de la página
+		window.addEventListener('load', registrarEventos);
+	</script>
+</head>
+<body>
+	<form action="pagina.php" id="formulario">
+		
+		<input type="text" name="nombre" id="nombre" value="Pepito" >
+		<input type="text" name="apellido1" id="apellido1" value="Grillo" >
+		<input type="text" name="apellido2" id="apellido2" value="Del Campo">
+	</form>
+	<button id="quita">Quitar identificar a nombre</button>
+	<a href="eventos-tema5.html" id="enlace">Ir a eventos</a>
+</body>
+
+</html>

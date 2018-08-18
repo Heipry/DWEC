@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		//Uso de this
+		function identificar (objeto) {
+			console.log(objeto.name+' '+objeto.id+' '+objeto.value+' '+objeto.type);
+		}
+		function pregunta(){
+			return confirm("Seguro que quiere salir?");
+		}
+		function asignarEventos () {
+			//Eventos tradicional
+			var primero = document.getElementById("primero");
+			// Asignamos función SIN PARENTESIS
+			primero.onclick = pregunta;
+			//Uso de this
+			function alertar () {
+			alert("Serás redirigido a: "+this.href);
+			}
+			var enlace = document.getElementById("enlace");
+			enlace.onclick = alertar;
+		}
+		// Postergamos cargas conflictivas hasta la carga de la página
+		window.onload=asignarEventos;
+		/*Lista eventos:
+		onblur(perder foco),onchange(elemento cambia), onclick, ondblclick, onerror, onfocus(ganar foco), onkeydown, onkeypress, onkeyup,
+		onload, onmousedown, onmousemove, onmouseout, onmouseover, onmouseup, onresize, onselect, onunload(abandonar pagina)
+		*/
+	</script>
+</head>
+<body>
+	<form action="pagina.php" id="formulario">
+		<!--Eventos en linea -->
+		<input type="text" name="nombre" id="nombre" value="Pepito" onclick="identificar(this)">
+		<input type="text" name="apellido1" id="apellido1" value="Grillo" onclick="identificar(this)">
+		<input type="text" name="apellido2" id="apellido2" value="Del Campo" onclick="identificar(this)">
+	</form>
+	<!--Evitar accion por defecto -->
+	<a href="http://google.com" onclick="return false">www.google.com</a><br>
+	<!--Preguntar accion por defecto -->
+	<a href="forms-tema5.html" onclick="return pregunta()">cambiar</a><br>
+	<!--Eventos tradicional -->
+	<button id="primero">Adios</button><br>
+	<a href="forms-tema5.html" id="enlace">forms</a>
+</body>
+
+</html>
