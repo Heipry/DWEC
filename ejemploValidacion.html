@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+    <head>
+        
+        <!-- Global Metas -->
+        <meta charset="utf-8">
+        <meta name="description" content="Ejemplo de formulario con validacion javascript">
+        <meta name="author" content="Javier Diaz">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Ejemplo de formulario con validacion javascript</title>
+
+        <!-- Mobile Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- CSS's -->
+        <style>
+        	label, input, select{
+        		width: 150px;
+        		float: left;
+        		margin-bottom: 5px;
+          	}
+          	fieldset{
+				background: #CCFF99;
+				width: 350px;
+          	}
+          	#mensaje {
+          		font-size: 0.8em;
+          		color: red;
+          	}
+          	.error{
+          		border: solid 2px red;
+          	}
+        </style>
+        <script>
+        	function validarTexto (objeto) {
+        	    var formulario = objeto.form;
+        	    var error = document.getElementById("mensaje");
+        	    error.innerText="";
+        	    for(var i = 0; i < formulario.elements.length; i++){
+        	    	formulario.elements[i].className="";
+        	    	if(formulario.elements[i].type=="text" && formulario.elements[i].value==""){
+        	    		formulario.elements[i].className="error";
+        	    		document.getElementsByName(formulario.elements[i].name)[0].focus();
+        	    		error.innerText ="El campo "+formulario.elements[i].name+" no puede estar vacio";
+        	    		return false;
+        	    	}
+        	    if (formulario.elements[i].name == "edad") {
+        	    		if (isNaN(formulario.elements[i].value)) {
+        	    			error.innerText = "El campo "+formulario.elements[i].name+" debe ser un numero";
+        	    			document.getElementsByName("edad")[0].focus();
+        	    			document.getElementsByName("edad")[0].value="";
+        	    			return false;
+        	    		} 
+        	    	}	
+        	    }
+        	    return true;
+        	}      
+        	function validarMatricula () {
+        	    var matricula = document.getElementById("matricula");
+        	    var error = document.getElementById("mensaje");        	    
+        	    var patron = /^\d{4}\s?[A-Z]{3}$/
+        	    if (patron.test(matricula.value)) {
+        	    	return true;
+        	    }
+        	    error.innerText += "El campo matricula no es correcto (Deben ser 4 números y 3 letras mayúsculas)";
+        	    matricula.className = "error";
+        	    matricula.focus();
+        	    return false;        	    
+        	}
+        	function validarProvincia () {
+        	    var provincia = document.getElementById("provincia");
+        	    var error = document.getElementById("mensaje"); 
+        	    if (provincia.selectedIndex==0) {
+        	    	provincia.focus();
+        	    	provincia.className = "error";
+        	    	error.innerText += "Debe elegir una provincia";
+        	    	return false;
+        	    }     
+        	    return true;
+        	}        	  	
+        	function validar (evento) {
+        		if (validarTexto(this) && validarMatricula() && validarProvincia()){
+        			return true;
+        		}else{
+        			evento.preventDefault();
+        			return false
+        		}
+        	}
+        	function registrarClick (evento) {
+        		boton = document.getElementById('enviar'); 
+        		boton.addEventListener('click', validar, true);
+        	}
+        	
+        	window.addEventListener('load', registrarClick);
+        </script>
+ 
+    </head>
+    <body>
+        <fieldset>
+        	<legend>Validación de formulario</legend>
+	        	<form action="ejemploValidacion.php" method="get" name="formulario" id="formulario">
+		        	<label for="nombre">Nombre:</label>
+		        	<input type="text" name="nombre" id="nombre">
+		        	<label for="apellidos">Apellidos:</label>
+		        	<input type="text" name="apellidos" id="apellidos">
+		        	<label for="edad">Edad:</label>
+		        	<input type="text" name="edad" id="edad" maxlength="3">
+		        	<label for="matricula">Matricula:</label>
+		        	<input type="text" name="matricula" id="matricula" value="XXXX AAA">
+		        	<label for="provincia">Provincia:</label>
+		        	<select name="provincia" id="provincia">
+		        		<option value="0" selected="selected">Seleccione provincia</option>
+		        		<option value="H">Huesca</option>
+		        		<option value="Z">Zaragoza</option>
+		        		<option value="T">Teruel</option>
+		        	</select>
+		        	<input type="reset" name="limpiar" id="limpiar" value="Limpiar">
+		        	<input type="submit" name="enviar" id="enviar" value="Enviar">
+        		</form>
+        </fieldset>
+        <div id="mensaje"></div>
+    </body>
+</html>
